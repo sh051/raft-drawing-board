@@ -1,4 +1,4 @@
-# 🧠 Mini-RAFT Distributed Drawing Board
+# Mini-RAFT Distributed Drawing Board
 
 A fault-tolerant, real-time collaborative drawing application built using a **Mini-RAFT consensus protocol**.
 
@@ -6,33 +6,33 @@ This project simulates real-world distributed systems used in cloud infrastructu
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🎨 Real-time collaborative drawing (WebSockets)
-- 🧩 Distributed system with 3 replicas
-- 🗳️ Leader election (RAFT-like)
-- 📜 Log replication & consistency
-- 🔄 Automatic failover handling
-- ⚡ Zero-downtime replica reload
-- 🔁 State synchronization on restart
-
----
-
-
-
+- Real-time collaborative drawing (WebSockets)
+- Distributed system with 3 replicas
+- Leader election (RAFT-like)
+- Log replication & consistency
+- Automatic failover handling
+- Zero-downtime replica reload
+- State synchronization on restart
 
 ---
 
-## ⚙️ Components
 
-### 🎨 Frontend
+
+
+---
+
+## Components
+
+### Frontend
 - HTML Canvas-based UI
 - Real-time drawing using mouse/touch
 - Receives updates via WebSocket
 
 ---
 
-### 🌐 Gateway (WebSocket Server)
+### Gateway (WebSocket Server)
 - Handles all client connections
 - Routes drawing events to leader
 - Broadcasts committed strokes
@@ -40,7 +40,7 @@ This project simulates real-world distributed systems used in cloud infrastructu
 
 ---
 
-### 🧩 Replica Nodes (3 instances)
+### Replica Nodes (3 instances)
 
 Each replica implements a **Mini-RAFT protocol**:
 
@@ -64,7 +64,7 @@ Each replica implements a **Mini-RAFT protocol**:
 
 ---
 
-## 🧠 Mini-RAFT Protocol
+## Mini-RAFT Protocol
 
 ### Leader Election
 - Timeout: 500–800ms
@@ -89,7 +89,7 @@ Each replica implements a **Mini-RAFT protocol**:
 
 ---
 
-## 🔄 Fault Tolerance
+## Fault Tolerance
 
 ✔ Leader crash → automatic re-election  
 ✔ Replica restart → state sync  
@@ -98,7 +98,7 @@ Each replica implements a **Mini-RAFT protocol**:
 
 ---
 
-## 🐳 Running the Project
+## Running the Project
 
 ### 1. Clone Repo
 
@@ -106,7 +106,32 @@ Each replica implements a **Mini-RAFT protocol**:
 git clone https://github.com/sh051/raft-drawing-board
 cd raft-drawing-board
 
-docker-compose up --build
+```
+### 2. Install dependencies
+```
 
+cd gateway && npm install
+cd ../replica1 && npm install
+cd ../replica2 && npm install
+cd ../replica3 && npm install
 
-http://localhost:<frontend-port>
+```
+
+### 3. Run servers
+```
+node server.js   # in replica1
+node server.js   # in replica2
+node server.js   # in replica3
+node server.js   # in gateway
+
+```
+
+### 4. Run frontend\
+```
+cd frontend
+npx http-server
+```
+
+### Open
+```
+http://localhost:8081
